@@ -1,0 +1,56 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace membre{% endblock %}
+
+{% block script %}
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+    <script>
+        setInterval(function(){
+            window.location.reload();
+        },5000);
+    </script>
+{% endblock %}
+
+{% block subtitle %}
+    <h1>Bienvenue {{ app.user.username }} !</h1>
+    {% if app.user.partiecours == 0 %}
+        <a href="{{ path('nouvelle_partie') }}"><button class="btn btn-primary">COMMENCER UNE NOUVELLE PARTIE</button></a>
+    {% endif %}
+{% endblock %}
+
+
+{% block body %}
+
+    <div id="alert">
+        {% if app.user.partiecours != 0 and ja != "" %}
+            <div class="alert alert-success" role="alert">
+                <div class="row">
+                    <div class="col-3">
+                        <span>Vous avez une partie en cours</span>
+                    </div>
+                    <div style="text-align:center;" class="col-6">
+                        <p>Partie {{ partie.nom }}</p>
+                        <span>Contre {{ ja.username }}</span>
+                    </div>
+                    <div class="col-3">
+                        <a href="{{ path('afficher_partie', {'id': app.user.partiecours }) }}"><button class="btn btn-success">REJOINDRE</button></a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <h2>Vos informations</h2>
+    <p>Pseudo : {{ app.user.username }} </p>
+    <p>Email : {{ app.user.email }} </p>
+    <a href="{{ path('changer_infos') }}"><button class="btn btn-primary btn-sm">Changer vos informations</button></a>
+
+
+    <h2>Vos statistiques</h2>
+    <p>Nombre de partie(s) : {{ nbpartie }}</p>
+    <p>Nombre de victoire(s) : {{ app.user.victoire }}</p>
+    <p>Nombre de défaite(s) : {{ app.user.defaite }}</p>
+    <p>Pourcentage de victoire : {{ ratio }}</p>
+{% endblock %}
+
