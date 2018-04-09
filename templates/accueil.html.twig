@@ -1,0 +1,143 @@
+
+{#{% extends 'base.html.twig' %}
+
+   {% block title %}Accueil{% endblock %}
+
+
+  {# {% block subtitle %}Bienvenue {{ app.user.username }} !{% endblock %}#}
+
+{#{% block content %}
+       <h1>Bienvenue sur mon site</h1>
+   {% endblock %}#}
+<!--DOCUMENT ENTIÈREMENT RÉALISÉ ET COMMENTÉ PAR MAUCLAIR JULIAN-->
+<!--Validation W3C executé le ../../....-->
+<!DOCTYPE html>
+<html>
+
+<!--EN TÊTE-->
+<head>
+    <!--Langue-->
+    <meta charset="utf-8">
+    <!--Gestion des MediasQueries-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Titre-->
+    <title>Zenhurt</title>
+    <!--Meta-->
+    <meta description="DESCRIPTION">
+    <!--Feuille de Style-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!--Police de caractère-->
+    <link href="https://fonts.googleapis.com/css?family=" rel="stylesheet">
+    <!--Appel de jQuery en ligne & en local-->
+    <script type="text/javascript" src="assets/js/jquery.parallax-1.1.3.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.scrollTo-1.4.2-min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.localscroll-1.2.7-min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+            var ute = 0;
+            setInterval(function(){
+                if(ute == 0){
+                    $('#video').css('display','block');
+                    ute++;
+                } else{
+                    $('#video').css('display','none');
+                }
+            },2500);
+        });
+        $(document).ready(function() {
+            var ite=0;
+            if (ite == 0){
+                var page = $('#accueil');
+                $('html, body').animate({
+                    scrollLeft: $(page).offset().left
+                }, 0 );
+                return false;
+                ite++;
+            }
+        });
+        $(document).ready(function() {
+            $('.js-scrollTo').on('click', function() {
+                var page = $(this).attr('href');
+                var speed = 750;
+                $('html, body').animate({
+                    scrollLeft: $(page).offset().left
+                }, speed );
+                return false;
+            });
+        });
+        function ouvre_actions(page){
+            if(page == 'dissimulation'){
+                page = 'pages_actions/dissimulation.html';
+            } else if(page == 'secret'){
+                page = 'pages_actions/secret.html';
+            } else if(page == 'concurrence'){
+                page = 'pages_actions/concurrence.html';
+            } else if(page == 'cadeau'){
+                page = 'pages_actions/cadeau.html';
+            }
+            window.open(page,"nom_popup","menubar=no, status=no, scrollbars=no, menubar=no, width=1200, height=300, position:absolute, top=40%, left=40%");
+        }
+    </script>
+</head>
+<!--FIN EN TÊTE-->
+
+<!--CORPS-->
+<body>
+<div id="container_video">
+    <video id="video" autoplay="true">
+        <source src="assets/presentation.mp4" type="video/mp4" />
+    </video>
+</div>
+<section id="tutoriel">
+    <div class="content">
+        video
+    </div>
+    <a href="#accueil" class="js-scrollTo retour">Retour ></a>
+</section>
+<section id="accueil">
+    <div id="middle-zone">
+        <img src="assets/images/logo.png" alt="logo">
+        <a id="jouer" href="{{ path('security_login') }}">Jouer</a>
+        <a id="lien_tutoriel" class="js-scrollTo" href="#tutoriel">Voir le tutoriel</a>
+        <a id="video_presentation" href="">Rejouer la vidéo de présentation</a>
+        <a id="lien_regles" class="js-scrollTo" href="#regles">Consulter les règles</a>
+    </div>
+    <div id="bottom-zone">
+        <p>Jeu developpé par l'agence</p>&nbsp;
+        <img src="assets/images/logo_agence.png" alt="logo_agence">
+    </div>
+</section>
+<section id="regles">
+    <a href="#accueil" class="js-scrollTo retour">< Retour</a>
+    <div class="content">
+        <h2>Règles du jeu :</h2>
+        <p>Dans Zenhurt, le but du jeu est de capturer plus d'humains que votre adversaire ou gagner au minimum 11 points d'élevage.</p>
+        <p>Votre adversaire et vous allez jouer chacun votre tour, et allez réaliser des actions impliquant différents appâts.</p>
+        <p>Si vous avez donnés plus de cartes d'appâts que votre adversaire à un humain, vous capturez l'humain.</p>
+        <p>La partie se poursuit jusqu'à ce que l'un des joueurs ait atteint l'objectif, lors du décompte des points.</p>
+        <div id="actions">
+            <a onclick="ouvre_actions('dissimulation')" class="conteneur_actions">
+                <h3>Dissimulation</h3>
+                <img src="assets/images/actions/dissimulation.jpg">
+            </a>
+            <a onclick="ouvre_actions('secret')" class="conteneur_actions">
+                <h3>Secret</h3>
+                <img src="assets/images/actions/secret.jpg">
+            </a>
+            <a onclick="ouvre_actions('concurrence')" class="conteneur_actions">
+                <h3>Concurrence</h3>
+                <img src="assets/images/actions/concurrence.jpg">
+            </a>
+            <a onclick="ouvre_actions('cadeau')" class="conteneur_actions">
+                <h3>Cadeau</h3>
+                <img src="assets/images/actions/cadeau.jpg">
+            </a>
+        </div>
+    </div>
+</section>
+</body>
+<!--FIN CORPS-->
+
+</html>
+<!--FIN DOCUMENT-->

@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="{{ asset('assets/css/style_login_register.css')}}">
+        <header>
+            <a ><img src="../assets/images/logo.png"></a>
+            <a href="{{ path('security_login') }}">Connexion</a>
+            <a href="{{ path('user_registration') }}">Inscription</a>
+            <a href="{{ path('nouvelle_partie') }}">Plateau</a>
+        </header>
+   {% block content %}
+       <h1>Inscription</h1>
+                    {{ form_start(form) }}
+
+       <div id="content">
+
+
+           {{ form_row(form.fullName)  }}
+           {{ form_row(form.username) }}
+           {{ form_row(form.email) }}
+           {{ form_row(form.password.first) }}
+           {{ form_row(form.password.second) }}
+
+                    <button type="submit" >S'inscrire !</button>
+       </div>
+                    {{ form_end(form) }}
+
+
+
+{% endblock %}

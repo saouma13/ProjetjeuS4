@@ -1,0 +1,28 @@
+
+{% block title %}Nouvelle Partie{% endblock %}
+
+   {% block subtitle %}Choisissez votre adversaire{% endblock %}
+
+{% block body %}
+
+<div id="accueil">
+
+                <form  method = "post"  action = " {{path ('creer_partie')}} ">
+
+                    Choisissez l'adversaire:
+                    <select name = "adversaire" >
+
+                        <option  value = " "> Choisir </option>
+                        {% for  joueur  in  joueurs %}
+                            <option  value = " {{ joueur.id }} "> {{ joueur.username }} </option>
+                        {% endfor %}
+
+                    </select>
+                    <input  class="btn btn-primary" type = "submit"  value = " Créer la partie ">
+
+                </form>
+</div>
+{% endblock %}
+
+
+

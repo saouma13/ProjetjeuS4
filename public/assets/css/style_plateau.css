@@ -1,0 +1,336 @@
+@font-face {
+    font-family:"Twcenmt";
+    src: url("../fonts/twcenmt.woff");
+}
+
+@font-face {
+    font-family:"Ikaros";
+    src: url("../fonts/Ikaros.otf");
+}
+
+@font-face {
+    font-family:"Ikaros light";
+    src: url("../fonts/Ikaros light.otf");
+}
+
+html{
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+}
+
+body{
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+header{
+	width:100%;
+	height:100px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background-color:black;
+}
+
+object{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+#interfaces{
+	width:15%;
+	height:100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background-color:black;
+}
+
+#back{
+	width:20%;
+	height:100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background-color:rgba(255,255,255,0.5);
+	transition-duration:0.5s;
+}
+
+#profil{
+	width:80%;
+	height:100%;
+}
+
+#back:hover{
+	background-color:rgba(255,255,255,1);
+	cursor:pointer;
+}
+
+#content{
+	width:70%;
+	height:100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	flex-direction:column;
+	background-image:url('../../objets_plateau/plateau.png');
+}
+
+#cartes_personnages{
+	height:35%;
+	width:100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+	#cartes_personnages object{
+		width:14%;
+		height:100%;
+	}
+
+	.cartes{
+		width:90%;
+	}
+
+	.marqueur{
+		width:150px;
+		filter:drop-shadow(0px 0px 2px black);
+		position:absolute;
+	}
+
+#first_container{
+	height:65%;
+	width:100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+	#second_container{
+		height:100%;
+		width:100%;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		flex-direction:column;
+	}
+
+		.container{
+			width:100%;
+			display:flex;
+			justify-content:center;
+			align-items:center;
+		}
+
+			#pioche{
+				width:20%;
+				height:100%;
+				display:flex;
+				justify-content:center;
+				align-items:center;
+			}
+
+				#pioche object{
+					width:100%;
+					height:100%;
+					flex-direction:column;
+				}
+
+				#pioche object img{
+					width:60%;
+					cursor:pointer;
+				}
+
+				#pioche object img:hover{
+					filter:drop-shadow(0px 0px 2px white);
+				}
+
+				#pioche p{
+					color:white;
+					font-family:"Ikaros";
+					font-size:15px;
+					padding:0;
+					margin:0;
+				}
+
+			#actions{
+				width:70%;
+				padding:0 5%;
+				background-color:rgba(0,0,0,0.5);
+				border-top-left-radius:20px;
+				border-bottom-left-radius:20px;
+				height:100%;
+				display:flex;
+				justify-content:center;
+				align-items:center;
+			}
+
+				#actions object{
+					width:20%;
+					height:100%;
+					flex-direction:column;
+				}
+
+				#actions object img{
+					height:50%;
+					transition-duration:0.2s;
+					cursor:pointer;
+				}
+
+				#actions object img:hover{
+					transform:scale(1.1);
+				}
+
+				#actions p{
+					color:white;
+					font-family:"Ikaros";
+					font-size:15px;
+					padding:0;
+					margin:0;
+				}
+
+			#avatar{
+				width:15%;
+				height:100%;
+				display:flex;
+				justify-content:center;
+				align-items:center;
+			}
+
+				#avatar object{
+					width:100%;
+					height:100%;
+					flex-direction:column;
+				}
+
+				#avatar object img{
+					height:50%;
+				}
+
+				#avatar p{
+					color:white;
+					font-family:"Ikaros";
+					font-size:15px;
+					padding:0;
+					margin:0;
+				}
+
+			#main{
+				width:85%;
+				height:100%;
+				display:flex;
+				justify-content:center;
+				align-items:center;
+			}
+
+				#main object{
+					width:13%;
+					height:100%;
+					transition-duration:0.3s;
+					cursor:pointer;
+				}
+
+				#main object img{
+					width:100%;
+				}
+
+				#main object:hover{
+					margin-top:-40px;
+				}
+
+	#actions_restantes{
+		height:100%;
+		width:15%;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		flex-direction:column;
+	}
+
+		#actions_restantes object img{
+			height:70%;
+		}
+
+		#actions_adversaire{
+			height:50%;
+			width:100%;
+			display:flex;
+			justify-content:center;
+			align-items:center;
+			flex-direction:column;
+			background-color:#222222;
+		}
+
+		#actions_adversaire object{
+			height:50%;
+			width:100%;
+		}
+
+		#actions_utilisateur{
+			height:50%;
+			width:100%;
+			display:flex;
+			justify-content:center;
+			align-items:center;
+			flex-direction:column;
+			background-color:#dddddd;
+		}
+
+		#actions_utilisateur object{
+			height:50%;
+			width:100%;
+		}
+
+		.actions_container_un{
+			height:40%;
+			width:100%;
+			display:flex;
+			justify-content:center;
+			align-items:center;
+			flex-direction:column;
+		}
+
+		.actions_container_deux{
+			height:40%;
+			width:100%;
+			display:flex;
+			justify-content:center;
+			align-items:center;
+			flex-direction:column;
+		}
+
+		#actions_adversaire p{
+			font-family:"Ikaros";
+			font-size:18px;
+			color:white;
+			margin:5px;
+		}
+
+		#actions_adversaire i{
+			font-family:"Ikaros";
+			font-size:15px;
+			color:red;
+		}
+
+		#actions_utilisateur p{
+			font-family:"Ikaros";
+			font-size:18px;
+			color:black;
+			margin:5px;
+		}
+
+		#actions_utilisateur i{
+			font-family:"Ikaros";
+			font-size:15px;
+			color:green;
+		}

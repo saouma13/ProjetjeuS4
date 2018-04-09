@@ -1,0 +1,130 @@
+@font-face {
+    font-family:"Twcenmt";
+    src: url("../fonts/twcenmt.woff");
+}
+
+@font-face {
+    font-family:"Ikaros";
+    src: url("../fonts/Ikaros.otf");
+}
+
+@font-face {
+    font-family:"Ikaros light";
+    src: url("../fonts/Ikaros light.otf");
+}
+
+html{
+	height:100%;
+	width:100%;
+	margin:0;
+	padding:0;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+body{
+	height:100%;
+	width:100%;
+	margin:0;
+	padding:0;
+	overflow-y:hidden;
+	overflow-x:hidden;
+	background-image:url('../images/background.png');
+	background-size:cover;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	flex-direction:column;
+	background-attachment:fixed;
+	transition-duration:0.75s;
+}
+
+header{
+	height:100px;
+	width:100%;
+	margin:0;
+	padding:0;
+	background-color:rgba(0,0,0,0.8);
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+header a{
+	color:white;
+	font-size:18px;
+	font-family:"Twcenmt";
+	margin:5%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	text-decoration:none;
+}
+
+header a:hover{
+	color:#ef5522;
+}
+
+header img{
+	height:80px;
+	margin:5%;
+}
+
+#content{
+	height:calc(100% - 100px);
+	width:100%;
+	margin:0;
+	padding:0;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	flex-direction:column;
+}
+
+h1{
+	font-family:"Ikaros";
+	font-size:40px;
+	color:white;
+}
+
+form{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	flex-direction:column;
+}
+
+label{
+	color:white;
+	font-family:"Ikaros light";
+	font-size:15px;
+}
+
+input{
+	margin:10px 20px;
+	background-color:#222222;
+	color:white;
+	text-align:center;
+	border:2px solid white;
+	padding:15px 50px;
+}
+
+button{
+	background-color:white;
+	color:black;
+	padding:10px 15px;
+	border:2px solid black;
+}
+
+button:hover{
+	background-color:black;
+	color:white;
+	cursor:pointer;
+}
+
+label1{
+	color:white;
+	font-family:"Ikaros light";
+	font-size:15px;
+}

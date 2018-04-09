@@ -1,5 +1,6 @@
 {# templates/lucky/page.html.twig #}
-<body>
+{% extends 'base.html.twig' %}
+{% block body %}
 <h1>je ne suis pas un footballeur</h1>
     <a href="{{ url('app_lucky_number') }} ">voir l'article</a>
-</body>
+{% endblock body%}

@@ -1,0 +1,300 @@
+
+{#{% block title %}Partie {{ Partie.nom }} {% endblock %}#}
+
+    {% block script %}
+        <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+
+        <script>
+            setInterval(function(){
+                $.ajax({
+                    url: '{{ path('get_infos', {'id': Partie.id }) }}',
+                    method : "POST",
+                    success: function(data) {
+                        var id = '{{ app.user.id }}';
+                        if(data == id && data==id ){
+                            {% for action in action_dispo %}
+                            {% if action.dispo == 0 and choix_paire == 0 and choix_cadeau ==0 %}
+                            window.location.reload();
+                            {% endif %}
+                            {% endfor %}
+                            console.log(data,id)
+                        }else{
+                            console.log(data,id);
+                        }
+                    }
+                })
+            },5000);
+        </script>
+
+    {% endblock %}
+
+   {% block titre %}{% endblock %}
+
+   {% block subtitle %}
+       <div class="row">
+           <div id="objectifs" class="col" style="text-align:center;">
+               {% for carte in objectifs %}
+
+                   <span class="card" style="width:6rem; height:10rem; display:inline-block;line-height:2.6rem">
+                                {% if carte.ja != 0 %}
+                                    {% for i in 1..carte.ja %}
+                                        <span class="badge badge-info">{{ carte.nom }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    <span class="badge badge-pill badge-light">0</span>
+                                {% endif %}
+                       {% if carte.jeton == 'ja' %}
+                           <p style="color:red;">{{ carte.nom }}{#<img src=" {{ asset('assets/images/objectifs/'~carte.image)}}">#}</p>
+                                {% elseif carte.jeton == 'j'%}
+                           <p style="color:green;">{{ carte.nom }}</p>
+                       {% elseif carte.jeton == 'autre' %}
+                           <p>{{ carte.nom }}</p>
+                       {% endif %}
+                       {% if carte.j != 0 %}
+                           {% for i in 1..carte.j %}
+                               <span class="badge badge-success">{{ carte.nom }}</span>
+                           {% endfor %}
+                                    {% else %}
+                           <span class="badge badge-pill badge-light">0</span>
+                       {% endif %}
+                            </span>
+               {% endfor %}
+           </div>
+       </div>
+   {% endblock %}
+
+   {% block body %}
+       <div class="row">
+           <div class="col-2" id="infos_partie">
+               {% if j1.username is defined %}
+                   <p>j1 : {{ j1.username }}</p>
+                   <p>j2 : {{ j2.username }}</p>
+                   <p>Tour : <span id="tour">{{ Partie.tour }}</span></p>
+                   <p>Manche : {{ Partie.manche }}</p>
+               {% endif %}
+           </div>
+           <div id="texte_action" class="col-8 jumbotron" style="text-align:center;">
+
+               {% if message_fin != null %}
+                   {% if score !="" or score is defined %}
+                       <span>Score J1 = {{ score.j1 }}||</span><span>Score J2 = {{ score.j2 }}</span>
+                       <br>
+                   {% endif %}
+                   {% if message_fin == 'Aucun vainqueur' %}
+                       <p>{{ message_fin }}</p>
+                       <form method="post" action="{{ path('afficher_partie', {'id': Partie.id }) }}">
+                           <input type="submit" value="Passer à la manche suivante" name="manche_suivante" class="btn btn-primary">
+                       </form>
+                   {% else %}
+                       <h4>{{ message_fin }}</h4>
+                       <br>
+                       <form method="post" action="{{ path('afficher_partie', {'id': Partie.id }) }}">
+                           <input type="submit" value="Retour à votre profil" name="valid_fin" class="btn btn-primary">
+                       </form>
+                   {% endif %}
+               {% else %}
+                   {% for action in action_dispo %}
+                       {% if action.nom == "dissimulation" and action.dispo==1 %}
+                           <p>A vous de jouer</p>
+                       {% elseif action.nom == "dissimulation" and action.dispo==0 %}
+                           <p>Vous n'avez pas la main, patientez le tour de votre adversaire </p>
+                       {% endif %}
+                   {% endfor %}
+               {% endif %}
+
+
+
+               {% if choix_cadeau != 0 %}
+                   <h1>Cadeau</h1>
+                   <p>Choississez une carte de votre adversaire à placer sur votre plateau</p>
+                   <form method="post" action="{{ path('afficher_partie', {'id': Partie.id }) }}">
+                       {% for choix in choix_cadeau %}
+                           <span class="card text-white bg-dark mb-3" style="width:6rem; height:10rem; display:inline-block;">{{ choix.nom }}
+                               <input type="radio" id="check" value="{{ choix.id }}" name="carte_cadeau_choisie">
+                        </span>
+                       {% endfor %}
+                       <br><input type="submit" class="btn btn-primary" value="Valider action">
+                   </form>
+               {% endif %}
+
+               {% if choix_paire != 0 %}
+                   <h1>Concurrence</h1>
+                   <p>Choississez une paire l'autre sera attribuée à votre adversaire</p>
+                   <form method="post" action="{{ path('afficher_partie', {'id': Partie.id }) }}">
+                       {% for choix in choix_paire %}
+                           {% if choix.paire == 1 %}
+                               <span class="card text-white bg-dark mb-3" style="width:6rem; height:10rem; display:inline-block;">{{ choix.nom }}</span>
+                           {% endif %}
+                       {% endfor %}
+                       <input type="hidden" value="p1" name="choix_paire">
+                       <input type="submit" value="Paire1" class="btn btn-primary">
+                   </form>
+                   <form method="post" action="{{ path('afficher_partie', {'id': Partie.id }) }}">
+                       {% for choix in choix_paire %}
+                           {% if choix.paire == 2 %}
+                               <span class="card text-white bg-dark mb-3" style="width:6rem; height:10rem; display:inline-block;">{{ choix.nom }}</span>
+                           {% endif %}
+                       {% endfor %}
+                       <input type="hidden" value="p2" name="choix_paire">
+                       <input type="submit" value="Paire 2" class="btn btn-primary">
+                   </form>
+               {% endif %}
+
+               {% if action_choisie == 'dissimulation' %}
+                   <p>Choissisez la carte à dissimuler</p>
+                   <a href="{{ path('afficher_partie', {'id': Partie.id }) }}">Retour</a>
+               {% elseif action_choisie == 'disparition' %}
+                   <p>Choissisez 2 cartes à faire disparaître </p>
+                   <a href="{{ path('afficher_partie', {'id': Partie.id }) }}">Retour</a>
+               {% elseif action_choisie == 'cadeau' %}
+                   <p>Choissisez 3 cartes</p>
+                   <a href="{{ path('afficher_partie', {'id': Partie.id }) }}">Retour</a>
+               {% elseif action_choisie == 'concurrence' %}
+                   <p>Choissisez 2 paires de carte</p>
+                   <a href="{{ path('afficher_partie', {'id': Partie.id }) }}">Retour</a>
+               {% endif %}
+           </div>
+           <div class="col-2" id="pioche">
+               <div class="card text-white bg-secondary mb-3" style="width:6rem; height:10rem; display:inline-block;text-align:center;">
+                   <span><h3>Pioche</h3></span>
+                   {#<p>Partie : {{ Partie.nom }}</p>#}
+                   <p>Partie n°{{ Partie.id }}</p>
+               </div>
+           </div>
+       </div>
+
+       <div class="row">
+           <div class="col-2" id="actions_dispos">
+
+               {% for action in action_dispo %}
+
+                   {% if action.nom == 'dissimulation' %}
+                       <form method="post" action="{{ path('afficher_partie', {'id': Partie.id }) }}">
+                           <div class="form-group">
+                               <input type="hidden" value="dissimulation" name="action">
+                               {% if action.dispo == 0 or action.etat == 1 or choix_paire != 0 or choix_cadeau !=0 %}
+                                   <input style="width: 7rem;" type="submit" class="btn btn-primary disabled" value="{{ action.nom }}" disabled>
+                               {% elseif action.dispo == 1  %}
+                                   <input style="width: 7rem;" type="submit" class="btn btn-primary" value="{{ action.nom }}">
+                               {% endif %}
+                           </div>
+                       </form>
+                   {% elseif action.nom == 'disparition' %}
+                       <form method="post" action="{{ path('afficher_partie', {'id': Partie.id }) }}">
+                           <div class="form-group">
+                               <input type="hidden" value="disparition" name="action">
+                               {% if action.dispo == 0 or action.etat == 1 or choix_paire != 0 or choix_cadeau !=0 %}
+                                   <input style="width: 7rem;"  class="btn btn-success disabled" value="{{ action.nom }}" disabled>
+                               {% elseif action.dispo == 1 %}
+                                   <input style="width: 7rem;" type="submit" class="btn btn-success" value="{{ action.nom }}">
+                               {% endif %}
+                           </div>
+                       </form>
+                   {% elseif action.nom == 'cadeau' %}
+                       <form method="post" action="{{ path('afficher_partie', {'id': Partie.id }) }}">
+                           <div class="form-group">
+                               <input type="hidden" value="cadeau" name="action">
+                               {% if action.dispo == 0 or action.etat == 1 or choix_paire != 0 or choix_cadeau !=0 %}
+                                   <input style="width: 7rem;"  class="btn btn-warning disabled" value="{{ action.nom }}" disabled>
+                               {% elseif action.dispo == 1 %}
+                                   <input style="width: 7rem;" type="submit" class="btn btn-warning" value="{{ action.nom }}">
+                               {% endif %}
+                           </div>
+                       </form>
+                   {% elseif action.nom == 'concurrence' %}
+                       <form method="post" action="{{ path('afficher_partie', {'id': Partie.id }) }}">
+                           <div class="form-group">
+                               <input type="hidden" value="concurrence" name="action">
+                               {% if action.dispo == 0 or action.etat == 1 or choix_paire != 0 or choix_cadeau !=0 %}
+                                   <input style="width: 7rem;"  class="btn btn-danger disabled" value="{{ action.nom }}" disabled>
+                               {% elseif action.dispo == 1 %}
+                                   <input style="width: 7rem;" type="submit" class="btn btn-danger" value="{{ action.nom }}">
+                               {% endif %}
+                           </div>
+                       </form>
+                   {% endif %}
+
+               {% endfor %}
+
+
+               {% if carte_dissimulee %}
+                   <span>Carte dissimulée : </span>
+                   <span class="card text-white bg-dark mb-3" style="width:2.5rem; height:3.5rem; display:inline-block;">{{ carte_dissimulee }}</span><br>
+               {% endif %}
+
+               {% if cartes_disparues %}
+                   <span>Cartes disparues :</span>
+                   {% for carte in cartes_disparues %}
+                       <span class="card text-white bg-dark mb-3" style="display: inline-block; width:2.5rem; height:3.5rem;">{{ carte}}</span>
+                   {% endfor %}
+               {% endif %}
+
+           </div>
+           <div id="main" class="col-8" style="text-align:center;">
+
+               {% if action_choisie=='dissimulation' %}
+                   <form method="post" action="{{ path('afficher_partie', {'id': Partie.id }) }}">
+                       {% for carte in main %}
+                           <span class="card text-white bg-dark mb-3" style="width:6rem; height:10rem; display:inline-block;">{{ carte }}
+                               <input type="radio" id="check" value="{{ carte }}" name="carte_dissimulee_selectionnee">
+                            </span>
+                       {% endfor %}
+                       <input type="submit" class="btn btn-primary" value="Valider">
+                   </form>
+               {% elseif action_choisie=='disparition' %}
+                   <div id="disparition">
+                       <form method="post" action="{{ path('afficher_partie', {'id': Partie.id }) }}">
+                           {% for carte in main %}
+                               <span class="card text-white bg-dark mb-3" style="width:6rem; height:10rem; display:inline-block;">{{ carte }}
+                                   <input class="max2" id="check" type="checkbox" name="cartes_disparues[]" value="{{ carte }}"/>
+                            </span>
+                           {% endfor %}
+                           <input type="submit" class="btn btn-primary" value="Valider">
+                       </form>
+                   </div>
+               {% elseif action_choisie=='cadeau' %}
+                   <div id="cadeau">
+                       <form method="post" action="{{ path('afficher_partie', {'id': Partie.id }) }}">
+                           {% for carte in main %}
+                               <span class="card text-white bg-dark mb-3" style="width:6rem; height:10rem; display:inline-block;">{{ carte }}
+                                   <input class="max2" id="check"  type="checkbox" name="cartes_cadeau[]" value="{{ carte }}"/>
+                            </span>
+                           {% endfor %}
+                           <input type="submit" class="btn btn-primary" value="Valider">
+                       </form>
+                   </div>
+               {% elseif action_choisie=='concurrence' %}
+                   <div id="concurrence">
+                       <form method="post" action="{{ path('afficher_partie', {'id': Partie.id }) }}">
+                           {% for carte in main %}
+                               <span class="card text-white bg-dark mb-3" style="width:6rem; height:10rem; display:inline-block;">{{ carte }}
+                                   <p>Paire 1 :</p><input id="check"  class="max2" type="checkbox" name="paire1_concurrences[]" value="{{ carte }}"/>
+                                    <p>Paire 2 :</p><input id="check" class="max2" type="checkbox" name="paire2_concurrences[]" value="{{ carte }}"/>
+                                </span>
+                           {% endfor %}
+                           <input type="submit" class="btn btn-primary" value="Valider">
+                       </form>
+
+                   </div>
+               {% else %}
+                   {% for carte in main %}
+                       <span class="card text-white bg-dark mb-3" style="width:6rem; height:10rem; display:inline-block;">{{ carte}}{#<img src=" {{ asset('assets/images/cartes/'~Cartes[carte].Image)}}">#}</span>
+                   {% endfor %}
+               {% endif %}
+
+           </div>
+           <div class="col-2" id="actions_adverses">
+               <p>Actions adverses</p>
+               {% for action in action_dispo_adverse %}
+                   <ul class="list-group list-group-flush">
+                       {% if action.etat ==1 %}
+                           <li class="list-group-item disabled">{{ action.nom }}</li>
+                       {% elseif  action.etat ==0 %}
+                           <li class="list-group-item  ">{{ action.nom }}</li>
+                       {% endif %}
+                   </ul>
+               {% endfor %}
+           </div>
+       </div>
+
+   {% endblock %}

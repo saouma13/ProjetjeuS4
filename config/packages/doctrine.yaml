@@ -1,0 +1,51 @@
+parameters:
+    # Adds a fallback DATABASE_URL if the env var is not set.
+    # This allows you to run cache:warmup even if your
+    # environment variables are not available yet.
+    # You should not need to change this value.
+    env(DATABASE_URL): ''
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: jeuS4
+    database_user: root
+    database_password: root
+    mailer_transport: smtp
+    mailer_host: smtp.mailgun.org
+    mailer_user: postmaster@ms.saouma.com
+    mailer_password: 5178a7fce7e3c961bded4e04ddaa2d98-833f99c3-64da6559
+    mailer_port: 2525
+    root: 550d7c7331bbcb165378dcf8baa3152a7c5c5607
+
+doctrine:
+    dbal:
+        # configure these for your database server
+        driver: 'pdo_mysql'
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
+        server_version: '5.7'
+        charset: utf8mb4
+
+        # With Symfony 3.3, remove the `resolve:` prefix
+        url: '%env(resolve:DATABASE_URL)%'
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App
+# app/config/config.yml
+#fos_user:
+    #db_driver: orm
+    #firewall_name: main
+    #user_class: AppBundle\Entity\User
+    #from_email:
+        #address: "%mailer_user%"
+        #sender_name: "%mailer_user%"

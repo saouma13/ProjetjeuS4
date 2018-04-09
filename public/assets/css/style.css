@@ -1,3 +1,229 @@
-body {
-    background-color: #5eb5e0;
+@font-face {
+    font-family:"Twcenmt";
+    src: url("../fonts/twcenmt.woff");
+}
+
+@font-face {
+    font-family:"Ikaros";
+    src: url("../fonts/Ikaros.otf");
+}
+
+@font-face {
+    font-family:"Ikaros light";
+    src: url("../fonts/Ikaros light.otf");
+}
+
+html{
+	height:100%;
+	width:100%;
+	margin:0;
+	padding:0;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+body{
+	height:100%;
+	width:100%;
+	margin:0;
+	padding:0;
+	overflow-y:hidden;
+	overflow-x:hidden;
+	background-image:url('../images/background.png');
+	background-size:cover;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background-attachment:fixed;
+	transition-duration:0.75s;
+}
+
+section{
+	width:100%;
+	height:100%;
+	position:absolute;
+	margin:0;
+	padding:0;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+video{
+	height:100%;
+	transform:scale(1.2);
+	cursor:none;
+}
+
+#middle-zone{
+	width:100%;
+	height:50%;
+	margin:0;
+	padding:0;
+	background-color:rgba(0,0,0,0.8);
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	flex-direction:column;
+}
+
+#middle-zone img{
+	width:30%;
+	filter:drop-shadow(0px 0px 10px black);
+}
+
+#jouer{
+	padding:10px 30px;
+	background-color:#a60000;
+	color:white;
+	font-family:"Ikaros";
+	font-size:18px;
+	border-radius:5px;
+	text-decoration:none;
+}
+
+#video_presentation{
+	color:#ee5526;
+	font-family:"Ikaros";
+	margin-top:15px;
+	text-decoration:none;
+}
+
+#lien_tutoriel{
+	position:absolute;
+	font-family:"Ikaros light";
+	text-decoration:none;
+	color:white;
+	left:10px;
+	bottom:calc(33% - 50px);
+}
+
+#lien_regles{
+	position:absolute;
+	font-family:"Ikaros light";
+	text-decoration:none;
+	color:white;
+	right:10px;
+	bottom:calc(33% - 50px);
+}
+
+#bottom-zone{
+	position:fixed;
+	bottom:0;
+	width:100%;
+	font-family:"Ikaros";
+	background-color:black;
+	color:white;
+	height:30px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+#bottom-zone img{
+	height:25px;
+	margin-left:1px;
+	filter:drop-shadow(0px 0px 2px white)
+}
+
+#tutoriel{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+#regles{
+	left:200%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+#accueil{
+	left:100%;
+	flex-direction:column;
+	z-index:5;
+}
+
+.content{
+	width:70%;
+	height:100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	flex-direction:column;
+}
+
+.retour{
+	width:30%;
+	height:100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background-color:rgba(0,0,0,0.8);
+	color:white;
+	font-family:"Ikaros";
+	font-size:30px;
+	text-decoration:none;
+}
+
+#video{
+	background-color:black;
+	position:absolute;
+	top:0;
+	width:100%;
+	left:100%;
+	z-index:10;
+	margin:0;
+	padding:0;
+}
+
+.content h2{
+	font-family:"Ikaros";
+	font-size:22px;
+	filter:drop-shadow(0px 0px 2px black);	
+	color:#ee5526;
+}
+
+.content p{
+	font-family:"Arial";
+	font-size:15px;
+	color:white;
+}
+
+#actions{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	width:100%;
+}
+
+.conteneur_actions{
+	display:flex;
+	width:20%;
+	height:200px;
+	margin:20px;
+	background-color:rgba(0,0,0,0.5);
+	font-size:15px;
+	color:#ee5526;
+	justify-content:center;
+	align-items:center;
+	flex-direction:column;
+	font-family:"Ikaros";
+	text-decoration:none;
+}
+
+.conteneur_actions:hover{
+	transform:scale(1.05);
+	cursor:pointer;
+}
+
+.conteneur_actions h3{
+	padding-top:0;
+	margin-top:0;
+}
+
+.conteneur_actions img{
+	height:80px;
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connexion</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ asset('assets/css/style_login_register.css')}}">
+</head>
+<body>
+
+        <header>
+            <a ><img src="../assets/images/logo.png"></a>
+            <a href="{{ path('app_accueil') }}">Accueil</a>
+            <a href="{{ path('security_login') }}">Connexion</a>
+            <a href="{{ path('user_registration') }}">Inscription</a>
+            <a href="{{ path('nouvelle_partie') }}">Plateau</a>
+            {#<a class="nav-link" href="{{ path('mesParties') }}">Mes parties</a>#}
+            {#<a class="js-scrollTo" href="{{ path('nouvellePartie') }}">Nouvelle Partie</a>#}
+            {#<a class="js-scrollTo" href="{{ path('monClassement') }}">Mon Classement</a>#}
+        </header>
+   {% block content %}
+        <div id="content">
+       <h1>Connexion</h1>
+
+       {% if error %}
+           <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+       {% endif %}
+
+       <form method="post" action="{{ path('security_login') }}" class="form-horizontal col-md-6 col-md-offset-2">
+           <div id="content">
+               <label class="control-label col-sm-4" for="username">Pseudo</label>
+
+                   <input type="text" id="username" name="_username" value="{{ last_username }}"  />
+
+               <label class="control-label col-sm-4" for="password">Mot de passe</label>
+
+                   <input type="password" id="password" name="_password"  />
+
+           <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+
+                   <button type="submit">
+                        Se connecter
+                   </button>
+               </div>
+
+       </form>
+   {% endblock %}
+        </div>
+
+</body>
+</html>
